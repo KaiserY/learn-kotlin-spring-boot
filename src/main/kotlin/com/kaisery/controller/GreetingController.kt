@@ -17,6 +17,7 @@ class GreetingController {
     @RequestMapping(value = "/greeting", method = arrayOf(RequestMethod.GET))
     fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String): Greeting {
         Logging.logger.info("greeting count = " + counter.incrementAndGet())
+
         return Greeting(counter.get(), "Hello, $name")
     }
 }

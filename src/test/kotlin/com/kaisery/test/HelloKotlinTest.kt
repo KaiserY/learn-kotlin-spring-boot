@@ -1,6 +1,8 @@
 package com.kaisery.test
 
 import com.kaisery.Application
+import com.kaisery.controller.LoginRequest
+import com.kaisery.controller.LoginResponse
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Value
@@ -23,8 +25,16 @@ class HelloKotlinTest {
 
     @Test
     fun helloWorldTest() {
-        println(port)
         val entity = template.getForEntity("${addr}:${port}/greeting", String::class.java)
+
+        assert(entity.statusCode.is2xxSuccessful)
+    }
+
+    @Test
+    fun loginTest() {
+        val loginRequest = LoginRequest("aa", "123456")
+
+        val entity = template.postForEntity("${addr}:${port}/login", loginRequest, String::class.java)
 
         assert(entity.statusCode.is2xxSuccessful)
     }
