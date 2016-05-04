@@ -1,6 +1,5 @@
 package com.kaisery
 
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.kaisery.filter.JwtFilter
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

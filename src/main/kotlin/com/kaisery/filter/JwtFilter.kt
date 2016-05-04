@@ -13,18 +13,14 @@ import javax.servlet.http.HttpServletRequest
 class JwtFilter : GenericFilterBean() {
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
-        val authHeader: String? = (request as HttpServletRequest).getHeader("Authorization")
 
-        val token: String = if (authHeader?.startsWith("Bearer ") == true) {
-            authHeader?.substring(7)
-        } else {
-            throw ServletException("Missing or invalid Authorization header.")
-        }
+        val token: String = (request as HttpServletRequest?)?.getHeader("Cookie")?.substring(6)
+                ?: throw ServletException("Missing or invalid Cookie.")
 
         try {
             val claims: Claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).body
 
-            request.setAttribute("claims", claims)
+            request?.setAttribute("claims", claims) ?: throw ServletException("Request is null ???")
         } catch (e: SignatureException) {
             throw ServletException("Invalid token.")
         }
