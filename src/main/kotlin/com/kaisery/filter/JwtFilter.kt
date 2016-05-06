@@ -1,7 +1,7 @@
 package com.kaisery.filter
 
+import com.kaisery.common.token.Token
 import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureException
 import org.springframework.web.filter.GenericFilterBean
 import javax.servlet.FilterChain
@@ -18,7 +18,7 @@ class JwtFilter : GenericFilterBean() {
                 ?: throw ServletException("Missing or invalid Cookie.")
 
         try {
-            val claims: Claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).body
+            val claims: Claims = Token.parser.setSigningKey("secretkey").parseClaimsJws(token).body
 
             request?.setAttribute("claims", claims) ?: throw ServletException("Request is null ???")
         } catch (e: SignatureException) {

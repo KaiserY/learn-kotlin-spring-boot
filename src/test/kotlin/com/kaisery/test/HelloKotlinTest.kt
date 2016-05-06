@@ -3,12 +3,12 @@ package com.kaisery.test
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.kaisery.Application
-import com.kaisery.cache.Caching
+import com.kaisery.common.cache.Caching
+import com.kaisery.common.token.Token
 import com.kaisery.controller.LoginRequest
 import com.kaisery.controller.LoginResponse
 import com.kaisery.controller.User
 import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jwts
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Value
@@ -54,7 +54,7 @@ class HelloKotlinTest {
 
         val token = getTokenFromCookie(cookie)
 
-        val claims: Claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).body
+        val claims: Claims = Token.parser.setSigningKey("secretkey").parseClaimsJws(token).body
 
         assert((claims["roles"] as List<*>).contains("user"))
     }

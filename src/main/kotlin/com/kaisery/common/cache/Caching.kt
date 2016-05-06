@@ -1,4 +1,4 @@
-package com.kaisery.cache
+package com.kaisery.common.cache
 
 import com.kaisery.controller.User
 import org.ehcache.Cache

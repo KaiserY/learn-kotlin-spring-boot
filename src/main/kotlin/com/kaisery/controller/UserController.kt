@@ -1,6 +1,6 @@
 package com.kaisery.controller
 
-import io.jsonwebtoken.Jwts
+import com.kaisery.common.token.Token
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -29,16 +29,16 @@ class UserController {
     }
 
     @RequestMapping(value = "login", method = arrayOf(RequestMethod.POST))
-    @SuppressWarnings("unused")
     fun login(@RequestBody body: LoginRequest?, response: HttpServletResponse): LoginResponse {
 
-        val userName: String = if (userDB.containsKey(body?.name)) {
+        val userName: String = if (userDB.containsKey(body?.name) &&
+                userDB[body?.name]?.password == body?.password) {
             body?.name
         } else {
             throw ServletException("Invalid login")
         }
 
-        val token: String = Jwts.builder().setSubject(userName)
+        val token: String = Token.builder.setSubject(userName)
                 .claim("roles", userDB[userName]?.roles)
                 .setIssuedAt(Date())
                 .signWith(SignatureAlgorithm.HS256, "secretkey")
