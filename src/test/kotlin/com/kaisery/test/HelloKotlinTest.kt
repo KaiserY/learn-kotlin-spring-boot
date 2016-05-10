@@ -8,9 +8,11 @@ import com.kaisery.common.token.Token
 import com.kaisery.controller.LoginRequest
 import com.kaisery.controller.LoginResponse
 import com.kaisery.controller.User
+import com.kaisery.repository.UserRepository
 import io.jsonwebtoken.Claims
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.SpringApplicationConfiguration
 import org.springframework.boot.test.TestRestTemplate
@@ -27,6 +29,9 @@ class HelloKotlinTest {
 
     @Value("\${local.server.port}")
     val port: Int = 0;
+
+    @Autowired
+    lateinit var userRepository: UserRepository
 
     val addr = "http://localhost"
 
@@ -87,6 +92,13 @@ class HelloKotlinTest {
         val cachedUser = Caching.userCache.get(user.hashCode())
 
         assert(user.id == cachedUser.id)
+    }
+
+    @Test
+    fun userDBTest() {
+        val user: com.kaisery.entity.User = userRepository.findByName("aa")[0]
+
+        assert(user.password == "123456")
     }
 
     fun getTokenFromCookie(cookie: String): String {
