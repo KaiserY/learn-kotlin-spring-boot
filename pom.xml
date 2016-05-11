@@ -14,7 +14,9 @@
 
         <kotlin.version>1.0.1-2</kotlin.version>
         <h2.version>1.4.191</h2.version>
+        <jjwt.version>0.6.0</jjwt.version>
         <ehcache.version>3.0.0</ehcache.version>
+        <hikaricp.version>2.4.6</hikaricp.version>
     </properties>
 
     <parent>
@@ -74,9 +76,15 @@
         </dependency>
 
         <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${hikaricp.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.6.0</version>
+            <version>${jjwt.version}</version>
         </dependency>
 
         <dependency>
