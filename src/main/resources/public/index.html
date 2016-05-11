@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Learn Kotlin + Spring Boot</title>
+
+    <link rel="stylesheet" href="app.css">
 </head>
 
 <body>
-Hello World!
+<div id="app">
+    <div id="greeting">
+        <span id="greeting_span"></span>
+        <br>
+        <button id="greeting_button">Greeting!</button>
+    </div>
+
+    <div id="login">
+        <input type="text" id="login_name"><br>
+        <input type="text" id="login_password"><br>
+        <button id="login_button">Login</button>
+        <br>
+        <span id="login_span"></span>
+    </div>
+</div>
+
+<script src="vendor/jquery-2.2.3.js"></script>
+<script src="app.js"></script>
 </body>
 
 </html>
