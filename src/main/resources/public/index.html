@@ -5,14 +5,21 @@
     <title>Learn Kotlin + Spring Boot</title>
 
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="mdl.css">
+    <link rel="stylesheet" href="vendor/material.min.css">
+    <script src="vendor/material.min.js"></script>
+    <script src="vendor/jquery-2.2.3.js"></script>
 </head>
 
 <body>
 <div id="app">
+    <i class="material-icons">face</i>
     <div id="greeting">
         <span id="greeting_span"></span>
         <br>
-        <button id="greeting_button">Greeting!</button>
+        <button id="greeting_button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            Greeting!
+        </button>
     </div>
 
     <div id="login">
@@ -24,7 +31,6 @@
     </div>
 </div>
 
-<script src="vendor/jquery-2.2.3.js"></script>
 <script src="app.js"></script>
 </body>
 
