@@ -15,7 +15,7 @@ $('#login_button').click(function() {
         contentType:"application/json; charset=utf-8",
         dataType:"json",
         success: function(data, status, xhr) {
-            $('#login_span').html(xhr.getResponseHeader('Set-Cookie'));
+            $('#login_span').html(data);
         }
     });
 });
