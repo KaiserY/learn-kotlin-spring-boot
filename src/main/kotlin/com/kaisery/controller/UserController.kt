@@ -33,7 +33,7 @@ class UserController {
 
         val userName: String = if (userDB.containsKey(body?.name) &&
                 userDB[body?.name]?.password == body?.password) {
-            body?.name
+            body!!.name
         } else {
             throw ServletException("Invalid login")
         }
