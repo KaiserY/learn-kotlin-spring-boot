@@ -1,6 +1,6 @@
 $('#greeting_button').click(function() {
     $.get('/greeting', function(data) {
-        $('#greeting_span').html(JSON.stringify(data));
+        $('#greeting_text').html(JSON.stringify(data, null, 4));
     });
 });
 
@@ -15,7 +15,13 @@ $('#login_button').click(function() {
         contentType:"application/json; charset=utf-8",
         dataType:"json",
         success: function(data, status, xhr) {
-            $('#login_span').html(JSON.stringify(data));
+            $('#login_text').html(JSON.stringify(data, null, 4));
+            $('#login_text').css('color', 'green');
+        },
+        error: function(xhr, status, error) {
+            var response = JSON.parse(xhr.responseText);
+            $('#login_text').html(response.message);
+            $('#login_text').css('color', 'red');
         }
     });
 });
