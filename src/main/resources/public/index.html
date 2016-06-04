@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="roboto.css">
     <link rel="stylesheet" href="vendor/material.min.css">
     <link rel="stylesheet" href="app.css">
+    <link href="vendor/videojs/video-js.css" rel="stylesheet">
     <script src="vendor/material.min.js"></script>
     <script src="vendor/jquery-2.2.3.js"></script>
 </head>
@@ -110,6 +111,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div id="media" class="demo-card-event mdl-card mdl-card--border mdl-shadow--8dp">
+                            <div class="mdl-card__title">
+                                Media
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <audio id="media-audio" class="video-js" controls preload="auto" data-setup="{}">
+                                    <source src="assets/test.mp3" type='audio/mp3'>
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                                    </p>
+                                </audio>
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <a id="media_play" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                    Play
+                                </a>
+                                <div class="mdl-layout-spacer"></div>
+                                <i class="material-icons">spa</i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -126,6 +150,7 @@
 </div>
 
 <script src="app.js"></script>
+<script src="vendor/videojs/video.js"></script>
 </body>
 
 </html>

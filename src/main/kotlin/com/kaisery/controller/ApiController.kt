@@ -18,4 +18,9 @@ class ApiController {
 
         return if ((claims?.get("roles") as? List<*>)?.contains(role) == true) true else false
     }
+
+    @RequestMapping(value = "audio", method = arrayOf(RequestMethod.GET))
+    fun getAudio(request: HttpServletRequest) {
+
+    }
 }
