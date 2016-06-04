@@ -17,4 +17,6 @@ data class User(
         var name: String = "",
 
         var password: String = ""
-) : Serializable {constructor() : this(0, "", "") }
+) : Serializable {
+    constructor() : this(0, "", "")
+}

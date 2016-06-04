@@ -14,10 +14,16 @@ class JwtFilter : GenericFilterBean() {
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
 
-        val token: String = (request as HttpServletRequest?)?.getHeader("Cookie")?.substring(6)
+        val tokens: String = (request as HttpServletRequest?)?.getHeader("Cookie")
                 ?: throw ServletException("Missing or invalid Cookie.")
 
         try {
+            val tokenList = tokens.split(";")
+
+            val token = tokenList.singleOrNull {
+                token -> token.trim().startsWith("token")
+            }?.trim()?.split("=")?.get(1) ?: throw ServletException("Missing or invalid Cookie.")
+
             val claims: Claims = Token.parser.setSigningKey("secretkey").parseClaimsJws(token).body
 
             request?.setAttribute("claims", claims) ?: throw ServletException("Request is null ???")

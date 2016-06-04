@@ -18,6 +18,7 @@
         <ehcache.version>3.0.0</ehcache.version>
         <hikaricp.version>2.4.6</hikaricp.version>
         <red5.version>1.0.8-M2</red5.version>
+        <commons-io.version>2.5</commons-io.version>
     </properties>
 
     <parent>
@@ -98,6 +99,12 @@
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
             <version>${ehcache.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
     </dependencies>
 

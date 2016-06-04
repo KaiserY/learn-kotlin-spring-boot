@@ -1,3 +1,11 @@
+var player;
+
+$(document).ready(function() {
+    videojs("media-audio").ready(function() {
+        player = this;
+    });
+});
+
 $('#greeting_button').click(function() {
     $.get('/greeting', function(data) {
         $('#greeting_text').html(JSON.stringify(data, null, 4));
@@ -24,4 +32,9 @@ $('#login_button').click(function() {
             $('#login_text').css('color', 'red');
         }
     });
+});
+
+$('#media_play').click(function() {
+    player.src({"type":"audio/mp3", "src":"/api/audio"});
+    player.play();
 });
