@@ -37,4 +37,13 @@ class ApiController {
         IOUtils.copy(inputStream, response.outputStream);
         response.outputStream.flush()
     }
+
+    @RequestMapping(value = "video", method = arrayOf(RequestMethod.GET))
+    fun getVideo(request: HttpServletRequest, response: HttpServletResponse) {
+        val resource: Resource = context.getResource("classpath:public/assets/test.mp4")
+        val inputStream: InputStream = resource.inputStream
+        response.contentType = "video/mp4"
+        IOUtils.copy(inputStream, response.outputStream);
+        response.outputStream.flush()
+    }
 }

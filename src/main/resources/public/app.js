@@ -1,8 +1,12 @@
-var player;
+var audioPlayer;
+var videoPlayer;
 
 $(document).ready(function() {
-    videojs("media-audio").ready(function() {
-        player = this;
+    videojs("video-js-audio").ready(function() {
+        audioPlayer = this;
+    });
+    videojs("video-js-video").ready(function() {
+        videoPlayer = this;
     });
 });
 
@@ -34,7 +38,12 @@ $('#login_button').click(function() {
     });
 });
 
-$('#media_play').click(function() {
-    player.src({"type":"audio/mp3", "src":"/api/audio"});
-    player.play();
+$('#video-js-audio-play').click(function() {
+    audioPlayer.src({"type":"audio/mp3", "src":"/api/audio"});
+    audioPlayer.play();
+});
+
+$('#video-js-video-play').click(function() {
+    videoPlayer.src({"type":"video/mp4", "src":"/api/video"});
+    videoPlayer.play();
 });

@@ -114,13 +114,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <div id="media" class="demo-card-event mdl-card mdl-card--border mdl-shadow--8dp">
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <div id="audio" class="demo-card-event mdl-card mdl-card--border mdl-shadow--8dp">
                             <div class="mdl-card__title">
-                                Media
+                                Audio
                             </div>
                             <div class="mdl-card__supporting-text">
-                                <audio id="media-audio" class="video-js" controls preload="auto" data-setup="{}">
+                                <audio id="video-js-audio" class="video-js" controls preload="auto" data-setup="{}">
                                     <p class="vjs-no-js">
                                         To view this video please enable JavaScript, and consider upgrading to a web
                                         browser that
@@ -130,7 +130,32 @@
                                 </audio>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
-                                <a id="media_play"
+                                <a id="video-js-audio-play"
+                                   class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                    Play
+                                </a>
+                                <div class="mdl-layout-spacer"></div>
+                                <i class="material-icons">spa</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <div id="video" class="demo-card-event mdl-card mdl-card--border mdl-shadow--8dp">
+                            <div class="mdl-card__title">
+                                Video
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <video id="video-js-video" class="video-js" controls preload="auto" data-setup="{}">
+                                    <p class="vjs-no-js">
+                                        To view this video please enable JavaScript, and consider upgrading to a web
+                                        browser that
+                                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                            video</a>
+                                    </p>
+                                </video>
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <a id="video-js-video-play"
                                    class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                                     Play
                                 </a>
