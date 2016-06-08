@@ -4,15 +4,18 @@ import io.jsonwebtoken.Claims
 import org.apache.commons.io.IOUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
-import org.springframework.core.io.ClassPathResource
 import org.springframework.core.io.Resource
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.util.FileCopyUtils
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.io.InputStream
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+
+data class FileUploadResponse(val success: Boolean, val error: String? = null, val preventRetry: Boolean? = false, val reset: Boolean? = false)
 
 @RestController
 @RequestMapping("/api")
@@ -45,5 +48,16 @@ class ApiController {
         response.contentType = "video/mp4"
         IOUtils.copy(inputStream, response.outputStream);
         response.outputStream.flush()
+    }
+
+    @RequestMapping(value = "upload", method = arrayOf(RequestMethod.POST))
+    fun upload(@RequestParam("filename") fileName: String, @RequestParam("file") file: MultipartFile): FileUploadResponse {
+
+        val stream: BufferedOutputStream = BufferedOutputStream(FileOutputStream(File("/tmp/" + fileName)))
+
+        FileCopyUtils.copy(file.inputStream, stream)
+        stream.close()
+
+        return FileUploadResponse(true)
     }
 }

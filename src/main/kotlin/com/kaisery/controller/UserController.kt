@@ -23,8 +23,8 @@ data class LoginResponse(val token: String)
 class UserController {
     companion object {
         val userDB: Map<String, User> = hashMapOf(
-                Pair("aa", User(1, "aa", "123456")),
-                Pair("admin", User(0, "admin", "123456", arrayOf("user", "admin")))
+            Pair("aa", User(1, "aa", "123456")),
+            Pair("admin", User(0, "admin", "123456", arrayOf("user", "admin")))
         )
     }
 
@@ -32,17 +32,17 @@ class UserController {
     fun login(@RequestBody body: LoginRequest?, response: HttpServletResponse): LoginResponse {
 
         val userName: String = if (userDB.containsKey(body?.name) &&
-                userDB[body?.name]?.password == body?.password) {
+            userDB[body?.name]?.password == body?.password) {
             body!!.name
         } else {
             throw ServletException("Invalid login")
         }
 
         val token: String = Token.builder.setSubject(userName)
-                .claim("roles", userDB[userName]?.roles)
-                .setIssuedAt(Date())
-                .signWith(SignatureAlgorithm.HS256, "secretkey")
-                .compact()
+            .claim("roles", userDB[userName]?.roles)
+            .setIssuedAt(Date())
+            .signWith(SignatureAlgorithm.HS256, "secretkey")
+            .compact()
 
         val cookie = Cookie("token", token)
         cookie.isHttpOnly = true

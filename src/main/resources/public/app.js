@@ -1,6 +1,20 @@
 var audioPlayer;
 var videoPlayer;
 
+var uploader = new qq.FineUploader({
+    debug: true,
+    element: document.getElementById("fine-uploader"),
+    fileTemplate: "qq-template",
+    request: {
+        endpoint: "/api/upload",
+        inputName: "file",
+        filenameParam: "filename"
+    },
+    retry: {
+       enableAuto: true
+    }
+});
+
 $(document).ready(function() {
     videojs("video-js-audio").ready(function() {
         audioPlayer = this;

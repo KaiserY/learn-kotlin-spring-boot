@@ -10,13 +10,13 @@ import javax.persistence.Table
 @Table(name = "kotlin_user")
 data class User(
 
-        @Id
-        @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
-        var id: Long = 0,
+    @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
+    var id: Long = 0,
 
-        var name: String = "",
+    var name: String = "",
 
-        var password: String = ""
+    var password: String = ""
 ) : Serializable {
     constructor() : this(0, "", "")
 }

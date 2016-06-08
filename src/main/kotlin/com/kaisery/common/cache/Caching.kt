@@ -11,8 +11,8 @@ object Caching {
     val cacheManager: CacheManager = CacheManagerBuilder.newCacheManagerBuilder().build(true);
 
     val userCache: Cache<Int, User> = cacheManager.createCache("userCache",
-            CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                    Int::class.javaObjectType,
-                    User::class.java,
-                    ResourcePoolsBuilder.heap(10).build()))
+        CacheConfigurationBuilder.newCacheConfigurationBuilder(
+            Int::class.javaObjectType,
+            User::class.java,
+            ResourcePoolsBuilder.heap(10).build()))
 }
