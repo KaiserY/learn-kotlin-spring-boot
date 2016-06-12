@@ -51,12 +51,23 @@ class ApiController {
     }
 
     @RequestMapping(value = "upload", method = arrayOf(RequestMethod.POST))
-    fun upload(@RequestParam("filename") fileName: String, @RequestParam("file") file: MultipartFile): FileUploadResponse {
+    fun upload(
+        @RequestParam("filename") fileName: String,
+        @RequestParam("file") file: MultipartFile,
+        @RequestParam("partindex") partindex: Int,
+        @RequestParam("partbyteoffset") partByteOffset: Int,
+        @RequestParam("chunksize") chunkSize: Int,
+        @RequestParam("totalparts") totalParts: Int,
+        @RequestParam("totalfilesize") totalFileSize: Int
+    ): FileUploadResponse {
 
-        val stream: BufferedOutputStream = BufferedOutputStream(FileOutputStream(File("/tmp/" + fileName)))
+        val append: Boolean = if (partindex > 0) true else false
 
-        FileCopyUtils.copy(file.inputStream, stream)
-        stream.close()
+        val outputStream: BufferedOutputStream = BufferedOutputStream(FileOutputStream(File("/tmp/" + fileName), append))
+
+        outputStream.write(file.inputStream.readBytes(chunkSize))
+
+        outputStream.close()
 
         return FileUploadResponse(true)
     }

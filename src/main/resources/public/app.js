@@ -8,7 +8,24 @@ var uploader = new qq.FineUploader({
     request: {
         endpoint: "/api/upload",
         inputName: "file",
-        filenameParam: "filename"
+        filenameParam: "filename",
+        totalFileSizeName: "totalfilesize",
+        uuidName: "uuid"
+    },
+    chunking: {
+        enabled: true,
+        mandatory: true,
+        partSize: 1024 * 1024,
+        paramNames: {
+            chunkSize: "chunksize",
+            partByteOffset: "partbyteoffset",
+            partIndex: "partindex",
+            totalParts: "totalparts",
+        }
+    },
+    resume: {
+        enabled: true,
+        resuming: "resume"
     },
     retry: {
        enableAuto: true
