@@ -1,11 +1,11 @@
 package com.kaisery.controller
 
+import com.kaisery.common.multipart.MultipartFileSender
 import io.jsonwebtoken.Claims
 import org.apache.commons.io.IOUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.core.io.Resource
-import org.springframework.util.FileCopyUtils
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.io.BufferedOutputStream
@@ -43,11 +43,15 @@ class ApiController {
 
     @RequestMapping(value = "video", method = arrayOf(RequestMethod.GET))
     fun getVideo(request: HttpServletRequest, response: HttpServletResponse) {
-        val resource: Resource = context.getResource("classpath:public/assets/test.mp4")
-        val inputStream: InputStream = resource.inputStream
-        response.contentType = "video/mp4"
-        IOUtils.copy(inputStream, response.outputStream);
-        response.outputStream.flush()
+//        val resource: Resource = context.getResource("classpath:public/assets/test.mp4")
+//        val inputStream: InputStream = resource.inputStream
+//        response.contentType = "video/mp4"
+//        IOUtils.copy(inputStream, response.outputStream);
+//        response.outputStream.flush()
+        MultipartFileSender.fromFile(File("/home/yueyang/Downloads/Taylor Swift - Shake It Off.mp4"))
+            .with(request)
+            .with(response)
+            .serveResource()
     }
 
     @RequestMapping(value = "upload", method = arrayOf(RequestMethod.POST))

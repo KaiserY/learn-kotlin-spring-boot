@@ -1,7 +1,8 @@
 package com.kaisery.common.logging
 
-import java.util.logging.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object Logging {
-    val logger = Logger.getLogger(Logging::class.java.name)
+    val logger = LoggerFactory.getLogger(Logging::class.java)
 }
