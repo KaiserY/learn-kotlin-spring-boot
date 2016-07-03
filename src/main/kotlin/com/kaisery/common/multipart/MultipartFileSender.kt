@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse
  */
 class MultipartFileSender {
 
-    protected val logger = LoggerFactory.getLogger(this.javaClass)
+    internal val logger = LoggerFactory.getLogger(this.javaClass)
 
     internal var filepath: Path? = null
     internal var request: HttpServletRequest? = null

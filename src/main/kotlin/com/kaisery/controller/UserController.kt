@@ -28,7 +28,7 @@ class UserController {
         )
     }
 
-    @RequestMapping(value = "login", method = arrayOf(RequestMethod.POST))
+    @RequestMapping(value = "/login", method = arrayOf(RequestMethod.POST))
     fun login(@RequestBody body: LoginRequest?, response: HttpServletResponse): LoginResponse {
 
         val userName: String = if (userDB.containsKey(body?.name) &&
