@@ -13,16 +13,14 @@ import javax.servlet.http.HttpServletResponse
 data class Error(val errorCode: Int, val attr: Map<String, Any>)
 
 @RestController
-class CustomErrorController : ErrorController {
+class CustomErrorController @Autowired constructor(val errorAttributes: ErrorAttributes) : ErrorController {
+
     companion object {
         const val PATH: String = "/error"
     }
 
     @Value("\${debug}")
-    val debug: Boolean = false;
-
-    @Autowired
-    lateinit var errorAttributes: ErrorAttributes
+    val debug: Boolean = false
 
     override fun getErrorPath(): String? {
         return PATH

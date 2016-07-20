@@ -19,10 +19,7 @@ data class FileUploadResponse(val success: Boolean, val error: String? = null, v
 
 @RestController
 @RequestMapping("/api")
-class ApiController {
-
-    @Autowired
-    lateinit var context: ApplicationContext
+class ApiController @Autowired constructor(val context: ApplicationContext) {
 
     @RequestMapping(value = "role/{role}", method = arrayOf(RequestMethod.GET))
     fun hasRole(@PathVariable role: String, request: HttpServletRequest): Boolean {
@@ -37,7 +34,7 @@ class ApiController {
         val resource: Resource = context.getResource("classpath:public/assets/test.mp3")
         val inputStream: InputStream = resource.inputStream
         response.contentType = "audio/mpeg"
-        IOUtils.copy(inputStream, response.outputStream);
+        IOUtils.copy(inputStream, response.outputStream)
         response.outputStream.flush()
     }
 

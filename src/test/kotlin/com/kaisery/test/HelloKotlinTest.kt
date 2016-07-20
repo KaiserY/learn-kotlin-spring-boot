@@ -2,7 +2,6 @@ package com.kaisery.test
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.kaisery.Application
 import com.kaisery.common.cache.Caching
 import com.kaisery.common.token.Token
 import com.kaisery.controller.LoginRequest
@@ -13,35 +12,29 @@ import io.jsonwebtoken.Claims
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.test.SpringApplicationConfiguration
-import org.springframework.boot.test.TestRestTemplate
-import org.springframework.boot.test.WebIntegrationTest
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
+import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
+import org.springframework.test.context.junit4.SpringRunner
 
-@RunWith(SpringJUnit4ClassRunner::class)
-@SpringApplicationConfiguration(classes = arrayOf(Application::class))
-@WebIntegrationTest(randomPort = true)
+@RunWith(SpringRunner::class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class HelloKotlinTest {
-
-    @Value("\${local.server.port}")
-    val port: Int = 0;
 
     @Autowired
     lateinit var userRepository: UserRepository
 
-    val addr = "http://localhost"
-
-    val template = TestRestTemplate()
+    @Autowired
+    lateinit var template: TestRestTemplate
 
     val mapper = jacksonObjectMapper()
 
     @Test
     fun helloWorldTest() {
-        val entity = template.getForEntity("$addr:$port/greeting", String::class.java)
+        val entity = template.getForEntity("/greeting", String::class.java)
 
         assert(entity.statusCode.is2xxSuccessful)
     }
@@ -50,7 +43,7 @@ class HelloKotlinTest {
     fun loginTest() {
         val loginRequest = LoginRequest("aa", "123456")
 
-        val entity = template.postForEntity("$addr:$port/login", loginRequest, String::class.java)
+        val entity = template.postForEntity("/login", loginRequest, String::class.java)
 
         assert(entity.statusCode.is2xxSuccessful)
         assert(mapper.readValue<LoginResponse>(entity.body).token == "Token is in the Cookie :)")
@@ -68,7 +61,7 @@ class HelloKotlinTest {
     fun apiTest() {
         val loginRequest = LoginRequest("admin", "123456")
 
-        var entity = template.postForEntity("$addr:$port/login", loginRequest, String::class.java)
+        var entity = template.postForEntity("/login", loginRequest, String::class.java)
 
         assert(entity.statusCode.is2xxSuccessful)
 
@@ -79,7 +72,7 @@ class HelloKotlinTest {
         val headers = HttpHeaders()
         headers.add("Cookie", "token=$token")
 
-        entity = template.exchange("$addr:$port/api/role/admin", HttpMethod.GET, HttpEntity<HttpHeaders>(headers), String::class.java)
+        entity = template.exchange("/api/role/admin", HttpMethod.GET, HttpEntity<HttpHeaders>(headers), String::class.java)
 
         assert(entity.body.toBoolean())
     }

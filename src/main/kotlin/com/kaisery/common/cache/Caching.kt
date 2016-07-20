@@ -8,7 +8,7 @@ import org.ehcache.config.builders.CacheManagerBuilder
 import org.ehcache.config.builders.ResourcePoolsBuilder
 
 object Caching {
-    val cacheManager: CacheManager = CacheManagerBuilder.newCacheManagerBuilder().build(true);
+    val cacheManager: CacheManager = CacheManagerBuilder.newCacheManagerBuilder().build(true)
 
     val userCache: Cache<Int, User> = cacheManager.createCache("userCache",
         CacheConfigurationBuilder.newCacheConfigurationBuilder(
