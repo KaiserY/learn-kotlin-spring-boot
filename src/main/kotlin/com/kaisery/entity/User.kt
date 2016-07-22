@@ -1,19 +1,23 @@
 package com.kaisery.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.Version
 
-@Entity
-@Table(name = "kotlin_user")
-open class User(
+@JsonIgnoreProperties(value = "handler")
+open class User() {
+    constructor(name: String, password: String) : this() {
+        this.name = name;
+        this.password = password;
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long = 0,
+    private var id: Long? = null;
 
-    var name: String = "",
+    @Version
+    private var version: Long? = null;
 
-    var password: String = ""
-)
+    open var name: String = "";
+
+    open var password: String = "";
+}

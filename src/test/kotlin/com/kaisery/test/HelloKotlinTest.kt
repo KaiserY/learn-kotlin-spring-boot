@@ -89,7 +89,7 @@ class HelloKotlinTest {
 
     @Test
     fun userDBTest() {
-        val user: com.kaisery.entity.User = userRepository.findByName("aa")[0]
+        val user: com.kaisery.entity.User = userRepository.findByName("aa")
 
         assert(user.password == "123456")
     }

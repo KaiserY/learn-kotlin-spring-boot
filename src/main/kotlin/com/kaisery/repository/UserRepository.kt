@@ -1,8 +1,9 @@
 package com.kaisery.repository
 
 import com.kaisery.entity.User
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.orient.`object`.repository.OrientObjectRepository
 
-interface UserRepository : CrudRepository<User, Long> {
-    fun findByName(name: String): List<User>
+interface UserRepository : OrientObjectRepository<User> {
+
+    fun findByName(name: String): User
 }

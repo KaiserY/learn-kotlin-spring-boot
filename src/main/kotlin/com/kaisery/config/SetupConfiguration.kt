@@ -11,7 +11,7 @@ open class SetupConfiguration {
 
     @Bean
     open fun setupUser(userRepository: UserRepository) = ApplicationRunner {
-        userRepository.save(User(0, "aa", "123456"))
-        userRepository.save(User(0, "bb", "123456"))
+        userRepository.save(User("aa", "123456"))
+        userRepository.save(User("bb", "123456"))
     }
 }
